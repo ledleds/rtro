@@ -37,6 +37,7 @@
     "preact-render-to-string": "^5.1.4",
     "preact-router": "^3.2.1",
     "utf-8-validate": "^5.0.2",
+    "uuidv4": "^6.1.1",
     "ws": "^7.3.0"
   },
   "jest": {
