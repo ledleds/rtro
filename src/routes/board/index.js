@@ -1,10 +1,11 @@
 import { h } from 'preact';
 import { useContext } from 'preact/hooks';
-import UserContext from '../../context/userContext'
+import UserContext from '../../context/userContext';
 import { route } from 'preact-router';
 
 const Board = () => {
   const {username, allUsers, clearDb} = useContext(UserContext)
+
   if (!username) {
     // replaces the current history entry
     route('/', true)

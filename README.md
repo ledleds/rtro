@@ -6,7 +6,7 @@ The idea is to create a Retro app that encompasses the needs of my team, which h
 
 ## ToDo
 - [x] Create a new user
-- [ ] Remove Websockets
+- [x] Remove Websockets
   - I believe the realtime database could be enough for what I need here. I added websockets when starting out and pivoted to using Firebase. There is a bug in this current implementation which I think is down to this use of sockets. If I can think of a good use casee for websockets then I will swap from using native to Socket.io
 - [ ] Create Board with default columns
 - [ ] Have the option to add columns
