@@ -18,7 +18,7 @@ const Board = () => {
 
       <div>
         <p>Also on this board is:</p>
-        {allUsers.map((name) => 
+        {allUsers.filter(name => name != username).map((name) => 
                 <h2>{name}</h2>
               )}
         <button
