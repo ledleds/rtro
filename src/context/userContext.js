@@ -1,5 +1,6 @@
 import { createContext, Component } from 'preact';
 import firebase from '../firebase';
+import { uuid } from 'uuidv4';
 
 const UserContext = createContext();
 
@@ -10,15 +11,16 @@ class UserProvider extends Component {
   }
 
   state  = {	
-    username: '',
+    user: {name: '', id: null},
     userColour: null,
     allUsers: [],
   }
 
   // set current user and add to firebase db
   setUser = user => {
-    this.setState(() => ({ username: user }))
-    this.addName(user)
+    const id = uuid()
+    this.setState(() => ({ user: {name: user, id} }))
+    this.addName(user, id)
   }
 
   // interim helper to clear up the db
@@ -27,10 +29,9 @@ class UserProvider extends Component {
   }
 
   // add a name to the firebase db
-  addName = name => {
-    const newPostKey = this.usersRef.push().key
+  addName = (name, id = uuid()) => {
     const updates = {};
-    updates[`${newPostKey}`] = {name};
+    updates[`${ id }`] = {name};
 
     this.usersRef.update(updates, (error) => {
       if (error) {
@@ -44,12 +45,12 @@ class UserProvider extends Component {
   componentDidMount() {
     console.log('Fetching users from Firebase')
     this.usersRef.on('value', (snapshot) => {
-      const items = snapshot.val()
+      const dbItems = snapshot.val();
       let users = [];
-      for (let item in items) {
-        users.push(
-          items[item].name,
-        );
+      for (let item in dbItems) {
+        users.push({
+          name: dbItems[item].name, id: item
+        });
       }
 
       this.setState({
@@ -60,7 +61,7 @@ class UserProvider extends Component {
 
   render() {
     const { children } = this.props;
-    const { username } = this.state;
+    const { user } = this.state;
     const { userColour } = this.state;
     const { allUsers } = this.state;
     const { setUser, clearDb } = this;
@@ -68,7 +69,7 @@ class UserProvider extends Component {
     return (
       <UserContext.Provider
         value={{
-          username,
+          user,
           userColour,
           allUsers,
           setUser,

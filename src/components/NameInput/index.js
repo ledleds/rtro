@@ -6,21 +6,22 @@ class NameInput extends Component {
   static contextType = UserContext;
 
   render() {
-    const { setUser, username } = this.context;
+    const { setUser, user } = this.context;
 
     return (
       <form onSubmit={event => {
         // prevent a browser reload/refresh
         event.preventDefault()
         
-        this.props.onSubmitName(username)
+        this.props.onSubmitName(user.name)
       }}>
         <input 
           type="text" 
           id="firstName" 
           placeholder="Enter your name" 
+          // TODO: change this to be onsubmit instead
           onChange={event => setUser(event.target.value)}
-          value={username}
+          value={user.name}
         />
         <input type="submit" value="Get started" 
         

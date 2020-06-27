@@ -4,9 +4,9 @@ import UserContext from '../../context/userContext';
 import { route } from 'preact-router';
 
 const Board = () => {
-  const {username, allUsers, clearDb} = useContext(UserContext)
+  const {user, allUsers, clearDb} = useContext(UserContext)
 
-  if (!username) {
+  if (!user.name) {
     // replaces the current history entry
     route('/', true)
   }
@@ -14,13 +14,13 @@ const Board = () => {
 	return (
     <div>
       <h1>TESTING</h1>
-			<p>{`Hello: ${username}`}</p>
+			<p>{`Hello: ${user.name}`}</p>
 
       <div>
         <p>Also on this board is:</p>
-        {allUsers.filter(name => name != username).map((name) => 
-                <h2>{name}</h2>
-              )}
+        {allUsers.filter(({id}) => id != user.id).map(({name}) => 
+          <h2>{name}</h2>
+        )}
         <button
           onClick={() => {
             clearDb()
