@@ -9,5 +9,6 @@
 }
 
 .mainUser {
-  border: white 4px solid;
+  border: white 2px solid;
+  background-color: white;
 }
