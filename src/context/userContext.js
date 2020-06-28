@@ -14,6 +14,7 @@ class UserProvider extends Component {
     user: {name: '', id: null},
     userColour: null,
     allUsers: [],
+    retroStarted: false,
   }
 
   // set current user and add to firebase db
@@ -26,6 +27,10 @@ class UserProvider extends Component {
   // interim helper to clear up the db
   clearDb = () => {
     this.usersRef.set('/users', null)
+  }
+
+  startRetro = () => {
+    this.setState(() => ({ retroStarted: true }))
   }
 
   // add a name to the firebase db
@@ -64,7 +69,8 @@ class UserProvider extends Component {
     const { user } = this.state;
     const { userColour } = this.state;
     const { allUsers } = this.state;
-    const { setUser, clearDb } = this;
+    const { retroStarted } = this.state;
+    const { setUser, clearDb, startRetro } = this;
     
     return (
       <UserContext.Provider
@@ -74,6 +80,8 @@ class UserProvider extends Component {
           allUsers,
           setUser,
           clearDb,
+          retroStarted,
+          startRetro
         }}
       >
         {children}
