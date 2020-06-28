@@ -8,7 +8,7 @@ import Column from '../../components/Column'
 import UserIcon from '../../components/UserIcon'
 
 const Board = () => {
-  const {user, allUsers, clearDb} = useContext(UserContext)
+  const {user, allUsers, clearDb, startRetro, retroStarted} = useContext(UserContext)
 
   const columns = ['Start', 'Stop', 'Continue', '✨']
 
@@ -19,6 +19,11 @@ const Board = () => {
 
 	return (
     <div class={style.container}>
+      {!retroStarted && 
+        <button onClick={() => startRetro()}>
+          Start Retro
+        </button>
+      }
       <div class={style.userIcons}>
         {allUsers.filter(({id}) => id != user.id).map(({name}) => 
           <UserIcon initial={name.charAt(0).toUpperCase()} />
