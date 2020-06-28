@@ -4,7 +4,7 @@ import NameEntry from '../../components/NameEntry';
 
 const Home = () => {
 	return <div class={style.home}>
-		<h1>Welcome</h1>
+		<h1 class={style.welcome}>Welcome to rtro.</h1>
 		<NameEntry />
 	</div>
 };
