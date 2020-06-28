@@ -1,3 +1,19 @@
+.container {
+  padding: 20px 10px;
+}
+
+.userIcons {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  margin-bottom: 13px;
+}
+
+.divider {
+  border-left: black 3px solid;
+  margin: 4px;
+}
+
 .columns {
   display: flex;
   flex-direction: row;

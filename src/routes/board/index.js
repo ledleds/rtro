@@ -5,6 +5,7 @@ import style from './style';
 
 import UserContext from '../../context/userContext';
 import Column from '../../components/Column'
+import UserIcon from '../../components/UserIcon'
 
 const Board = () => {
   const {user, allUsers, clearDb} = useContext(UserContext)
@@ -17,22 +18,14 @@ const Board = () => {
   }
 
 	return (
-    <div>
-      <h1>TESTING</h1>
-			<p>{`Hello: ${user.name}`}</p>
-
-      <div>
-        <p>Also on this board is:</p>
+    <div class={style.container}>
+      <div class={style.userIcons}>
         {allUsers.filter(({id}) => id != user.id).map(({name}) => 
-          <h2>{name}</h2>
-        )}
-        <button
-          onClick={() => {
-            clearDb();
-          }}
-        >
-          Clear db
-        </button>
+          <UserIcon initial={name.charAt(0).toUpperCase()} />
+          )}
+        <div class={style.divider} />
+        {/* TODO: Do this uppercasing when accepting the users name */}
+        <UserIcon initial={user.name.charAt(0).toUpperCase()} mainUser={true} />
       </div>
 
       <div class={style.columns}>
@@ -40,6 +33,10 @@ const Board = () => {
           <Column title={title} />
         )}
       </div>
+
+      <button onClick={() => clearDb()}>
+        Clear db
+      </button>
     </div>
   )
 };
