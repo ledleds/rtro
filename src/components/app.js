@@ -2,7 +2,6 @@ import { h, Component } from 'preact';
 // import { useReducer } from 'preact/hooks'
 import { Router } from 'preact-router';
 
-import Header from './header';
 
 // Code-splitting is automated for routes
 import Home from '../routes/home';
@@ -24,7 +23,6 @@ export default class App extends Component {
 		return (
 			<UserProvider>	      
 					<div id="app">
-						<Header />
 						<Router onChange={this.handleRoute}>
 							<Home path="/" />
 							<Profile path="/profile/" user="me" />
