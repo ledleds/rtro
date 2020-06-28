@@ -1,0 +1,13 @@
+.container {
+  width: 330px;
+  min-height: 600px;
+  background-color: white;
+  padding: 10px;
+  margin: 10px;
+}
+
+.title {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  font-size: 24px;
+}
