@@ -14,7 +14,7 @@ const Column = ({title}) => {
 
       {!retroStarted && 
         <div>
-          <AddCard />
+          <AddCard column={title} />
         </div>
       }
     </div>

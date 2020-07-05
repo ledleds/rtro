@@ -8,6 +8,7 @@ class UserProvider extends Component {
   constructor(props) {
     super(props)
     this.usersRef = firebase.database().ref('users')
+    this.cardsRef = firebase.database().ref('cards')
   }
 
   state  = {	
@@ -15,11 +16,13 @@ class UserProvider extends Component {
     userColour: null,
     allUsers: [],
     retroStarted: false,
+    cards: {Start: [], Stop: [], Continue: [], MVP: []}
   }
 
   // set current user and add to firebase db
   setUser = user => {
     const id = uuid()
+    // TODO: Store user data in browser session: https://www.robinwieruch.de/local-storage-react
     this.setState(() => ({ user: {name: user, id} }))
     this.addName(user, id)
   }
@@ -37,7 +40,7 @@ class UserProvider extends Component {
   addName = (name, id = uuid()) => {
     const updates = {};
     updates[`${ id }`] = {name};
-
+    // TODO: change this to set instead
     this.usersRef.update(updates, (error) => {
       if (error) {
         console.log('There was an error updating the database');
@@ -45,6 +48,17 @@ class UserProvider extends Component {
         console.log('Successfully updated the database')
       }
     })
+  }
+
+  addNewCard = ({column, value}) => {
+    this.setState((state) => {
+      const cards = {...state.cards, [column]: [...state.cards[column], value]};
+ 
+      return {
+        ...state,
+        cards
+      };
+    });
   }
 
   componentDidMount() {
@@ -70,7 +84,8 @@ class UserProvider extends Component {
     const { userColour } = this.state;
     const { allUsers } = this.state;
     const { retroStarted } = this.state;
-    const { setUser, clearDb, startRetro } = this;
+    const { cards } = this.state;
+    const { setUser, clearDb, startRetro, addNewCard } = this;
     
     return (
       <UserContext.Provider
@@ -81,7 +96,9 @@ class UserProvider extends Component {
           setUser,
           clearDb,
           retroStarted,
-          startRetro
+          startRetro,
+          addNewCard,
+          cards
         }}
       >
         {children}

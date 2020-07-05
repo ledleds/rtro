@@ -13,7 +13,8 @@ The idea is to create a Retro app that encompasses the needs of my team, which h
 - [x] Create Board with default columns
 - [ ] Have the option to add columns
 - Tickets
-  - [ ] Can be added to the board
+  - [x] Can be added to the board
+  - [ ] Are displayed on the board
   - [ ] User can only see their tickets until retro has started
   - [ ] _Nice to have:_ The ability to emoji tickets
 - [ ] Start Retro

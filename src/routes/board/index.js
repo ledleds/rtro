@@ -10,7 +10,7 @@ import UserIcon from '../../components/UserIcon'
 const Board = () => {
   const {user, allUsers, clearDb, startRetro, retroStarted} = useContext(UserContext)
 
-  const columns = ['Start', 'Stop', 'Continue', '✨']
+  const columns = ['Start', 'Stop', 'Continue', 'MVP']
 
   if (!user.name) {
     // replaces the current history entry

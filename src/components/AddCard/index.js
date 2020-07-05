@@ -1,10 +1,30 @@
-import { useState } from 'preact/hooks';
+import { h } from 'preact';
+import { useState, useContext } from 'preact/hooks';
+import UserContext from '../../context/userContext';
 
-const AddCard = () => {
+import style from './style.css';
+
+const AddCard = ({column}) => {
+  const { addNewCard } = useContext(UserContext)
   const [inputVisible, setInputVisible] = useState(false);
+  const [cardText, setCardText] = useState(null);
 
   return (
-    inputVisible ? <div>HELLO</div> :
+    inputVisible ? 
+    <form onSubmit={event => {
+          event.preventDefault();
+          addNewCard({column, value: cardText});
+          setCardText(null);
+        }}>
+          <input 
+            class={style.textInput} 
+            type="text" name="newCard" 
+            onChange={event => {setCardText(event.target.value)}} 
+            value={cardText}
+          />
+          <input class={style.addButton} type="submit" value="Add" />
+        </form>
+       :
     (<button type="button" onClick={() => {setInputVisible(true)}}>
       +
     </button>)
