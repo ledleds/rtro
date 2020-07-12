@@ -15,6 +15,7 @@ const AddCard = ({column}) => {
           event.preventDefault();
           addNewCard({column, value: cardText});
           setCardText(null);
+          setInputVisible(false)
         }}>
           <input 
             class={style.textInput} 

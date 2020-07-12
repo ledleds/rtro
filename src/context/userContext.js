@@ -16,6 +16,7 @@ class UserProvider extends Component {
     userColour: null,
     allUsers: [],
     retroStarted: false,
+    // TODO: Improve the below to share card titles from elsewhere.
     cards: {Start: [], Stop: [], Continue: [], MVP: []}
   }
 
@@ -32,9 +33,14 @@ class UserProvider extends Component {
     this.usersRef.set('/users', null)
   }
 
-  startRetro = () => {
-    this.setState(() => ({ retroStarted: true }))
-  }
+  // startRetro = () => {
+  //   this.setState(() => ({ retroStarted: true }));
+  //   for (const [key, value] of Object.entries(this.state.cards)) {
+  //     firebase.database().ref(`cards/${key}`).update({
+  //       [this.state.user.id] : value
+  //     });
+  //   }
+  // }
 
   // add a name to the firebase db
   addName = (name, id = uuid()) => {
@@ -51,6 +57,11 @@ class UserProvider extends Component {
   }
 
   addNewCard = ({column, value}) => {
+    // firebase.database().ref(`cards/${column}`).update({
+    //   [this.state.user.id] : value
+    // });
+
+    // Below sets in state instead
     this.setState((state) => {
       const cards = {...state.cards, [column]: [...state.cards[column], value]};
  

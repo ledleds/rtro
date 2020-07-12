@@ -13,7 +13,6 @@ class NameInput extends Component {
       <form onSubmit={event => {
         // prevent a browser reload/refresh
         event.preventDefault()
-        
         this.props.onSubmitName(user.name)
       }}>
         <input 

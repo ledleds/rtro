@@ -10,6 +10,7 @@ import UserIcon from '../../components/UserIcon'
 const Board = () => {
   const {user, allUsers, clearDb, startRetro, retroStarted} = useContext(UserContext)
 
+  // TODO: Colour columns
   const columns = ['Start', 'Stop', 'Continue', 'MVP']
 
   if (!user.name) {
