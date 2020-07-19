@@ -12,3 +12,20 @@
   border: white 2px solid;
   background-color: white;
 }
+
+.status {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  position: absolute;
+  top: 40px;
+  margin-left: 10px;
+}
+
+.ready {
+  background: green;
+}
+
+.unready {
+  background: orange;
+}
