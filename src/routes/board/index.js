@@ -8,7 +8,7 @@ import Column from '../../components/Column'
 import UserIcon from '../../components/UserIcon'
 
 const Board = () => {
-  const {user, allUsers, clearDb, startRetro, retroStarted} = useContext(UserContext)
+  const {user, allUsers, clearDb, sendToDb, retroStarted} = useContext(UserContext)
 
   // TODO: Colour columns
   const columns = ['Start', 'Stop', 'Continue', 'MVP']
@@ -21,13 +21,13 @@ const Board = () => {
 	return (
     <div class={style.container}>
       {!retroStarted && 
-        <button onClick={() => startRetro()}>
-          Start Retro
+        <button onClick={() => sendToDb()}>
+          I'm ready
         </button>
       }
       <div class={style.userIcons}>
-        {allUsers.filter(({id}) => id != user.id).map(({name}) => 
-          <UserIcon initial={name.charAt(0).toUpperCase()} />
+        {allUsers.filter(({id}) => id != user.id).map(({name, ready}) =>
+          <UserIcon initial={name.charAt(0).toUpperCase()} ready={ready} />
           )}
         <div class={style.divider} />
         {/* TODO: Do this uppercasing when accepting the users name */}
@@ -41,7 +41,7 @@ const Board = () => {
       </div>
 
       <button onClick={() => clearDb()}>
-        Clear db
+        Clear users db
       </button>
     </div>
   )

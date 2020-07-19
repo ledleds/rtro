@@ -13,11 +13,13 @@ class UserProvider extends Component {
 
   state  = {	
     user: {name: '', id: null},
+    userReady: false,
     userColour: null,
     allUsers: [],
     retroStarted: false,
     // TODO: Improve the below to share card titles from elsewhere.
-    cards: {Start: [], Stop: [], Continue: [], MVP: []}
+    cards: {Start: [], Stop: [], Continue: [], MVP: []},
+    allCards: null
   }
 
   // set current user and add to firebase db
@@ -33,19 +35,38 @@ class UserProvider extends Component {
     this.usersRef.set('/users', null)
   }
 
-  // startRetro = () => {
-  //   this.setState(() => ({ retroStarted: true }));
-  //   for (const [key, value] of Object.entries(this.state.cards)) {
-  //     firebase.database().ref(`cards/${key}`).update({
-  //       [this.state.user.id] : value
-  //     });
-  //   }
-  // }
+  fetchCards = () => {
+    this.cardsRef.on('value', (snapshot) => {
+      this.setState({
+        allCards: snapshot.val(),
+      });
+    });
+  }
+
+  sendToDb = () => {
+    this.setState(() => ({ retroStarted: true }));
+    // send all current users cards to the db
+    for (const [key, value] of Object.entries(this.state.cards)) {
+      firebase.database().ref(`cards/${key}`).update({
+        [this.state.user.id] : value
+      });
+    }
+    // set current user as ready
+    firebase.database().ref(`users/${this.state.user.id}`).update({
+      ready : true
+    });
+
+
+    this.setState({
+      userReady: true,
+    });
+  }
 
   // add a name to the firebase db
   addName = (name, id = uuid()) => {
     const updates = {};
-    updates[`${ id }`] = {name};
+    updates[`${ id }`] = {name, ready: false};
+    console.log('---updates-->', JSON.stringify(updates))
     // TODO: change this to set instead
     this.usersRef.update(updates, (error) => {
       if (error) {
@@ -79,7 +100,7 @@ class UserProvider extends Component {
       let users = [];
       for (let item in dbItems) {
         users.push({
-          name: dbItems[item].name, id: item
+          name: dbItems[item].name, id: item, ready: dbItems[item].ready
         });
       }
 
@@ -87,29 +108,32 @@ class UserProvider extends Component {
         allUsers: users,
       });
     });
+
+    this.fetchCards();
   }
 
   render() {
     const { children } = this.props;
-    const { user } = this.state;
-    const { userColour } = this.state;
+    const { user, userReady, userColour } = this.state;
     const { allUsers } = this.state;
     const { retroStarted } = this.state;
-    const { cards } = this.state;
-    const { setUser, clearDb, startRetro, addNewCard } = this;
+    const { cards, allCards } = this.state;
+    const { setUser, clearDb, sendToDb, addNewCard } = this;
     
     return (
       <UserContext.Provider
         value={{
           user,
           userColour,
+          userReady,
           allUsers,
           setUser,
           clearDb,
           retroStarted,
-          startRetro,
+          sendToDb,
           addNewCard,
-          cards
+          cards,
+          allCards
         }}
       >
         {children}
