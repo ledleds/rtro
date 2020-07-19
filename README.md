@@ -7,7 +7,7 @@ The idea is to create a Retro app that encompasses the needs of my team, which h
 ## ToDo
 - [x] Create a new user
 - [x] Remove Websockets
-  - I believe the realtime database could be enough for what I need here. I added websockets when starting out and pivoted to using Firebase. There is a bug in this current implementation which I think is down to this use of sockets. If I can think of a good use casee for websockets then I will swap from using native to Socket.io
+  - I believe the realtime database could be enough for what I need here. I added websockets when starting out and pivoted to using Firebase. There is a bug in this current implementation which I think is down to this use of sockets. If I can think of a good use case for websockets then I will swap from using native to Socket.io
 - Users
   - [x] Assign an id to each user so that there can be multiple users of the same name.
 - [x] Create Board with default columns
@@ -16,7 +16,7 @@ The idea is to create a Retro app that encompasses the needs of my team, which h
 - Tickets
   - [x] Can be added to the board
   - [x] User can only see their tickets until retro has started
-  - [ ] User can see all users tickets when retro has started
+  - [x] User can see all users tickets when they mark themselves as "ready"
   - [ ] _Nice to have:_ The ability to emoji tickets
 - [ ] Start Retro
   - [ ] _Nice to have:_ The ability for individuals to show their tickets one by one. Rather than all loaded on the board at the same time.
