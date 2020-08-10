@@ -24,7 +24,7 @@ The idea is to create a Retro app that encompasses the needs of my team, which h
 ## Running
 - Follow instructions [here](https://firebase.google.com/docs/database/web/start) for setting up your database in Firebase.
   - You will need to configure your Realtime Database rules to allow you to read and write to it without auth, do this by navigating to your database, make sure you have Realtime Database selected and under Rules, update read and write to be true.
-- Populate firebaseConfig in src/firebase with credentials from firebase.
+- Populate your .env with credentials from firebase. (You can use the .env.example to see what you need)
 - Run `npm run dev`
 
 ## CLI Commands
