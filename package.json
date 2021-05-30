@@ -39,7 +39,7 @@
     "preact-router": "^3.2.1",
     "utf-8-validate": "^5.0.2",
     "uuidv4": "^6.1.1",
-    "ws": "^7.3.0"
+    "ws": "^7.4.6"
   },
   "jest": {
     "preset": "jest-preset-preact",
