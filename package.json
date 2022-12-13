@@ -31,7 +31,7 @@
   },
   "dependencies": {
     "bufferutil": "^4.0.1",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "firebase": "^7.15.4",
     "http": "0.0.1-security",
     "preact": "^10.3.2",
